@@ -80,4 +80,5 @@ def write_dns_file(file_path, records):
                 line = f"{record['name']} {record['ttl']} IN {record['type']} {value}"
                 if port is not None:
                     line += f":{port}"
-                line +=
+                line += "\n"
+            file.write(line)

@@ -1,8 +1,11 @@
 # dns_server.py
 
+from flask import Flask, request, jsonify
 import socket
 from dnslib import DNSRecord, DNSHeader, RR, A, QTYPE
 from records import load_records_from_file, get_record
+
+app = Flask(__name__)
 
 class DNSServer:
     def __init__(self, host='0.0.0.0', port=53, records_file='example.dns'):
@@ -41,6 +44,18 @@ class DNSServer:
                 response.header.rcode = 3  # NXDOMAIN
 
         sock.sendto(response.pack(), addr)
+
+@app.route('/resolve', methods=['GET'])
+def resolve():
+    """HTTP endpoint to resolve a domain."""
+    domain = request.args.get('domain')
+    record = get_record(domain)
+
+    if record:
+        ip, port = record
+        return jsonify({"domain": domain, "ip": ip, "port": port}), 200
+    else:
+        return jsonify({"error": "Domain not found"}), 404
 
 if __name__ == "__main__":
     server = DNSServer(records_file='example.dns')  # Specify your .dns file here

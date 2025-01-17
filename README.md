@@ -4,6 +4,8 @@ https://kmg.work.gd
 # Want a free email?
 It will be @free.kmg.work.gd
 Just email me at admin@kmg.work.gd
+# Want a free subdomain?
+email me at admin@kmg.work.gd and sent the ips or cname that I need to make the domain point to
 # Objective
 The main objective of this project is to allow someone to buy 1 ipv4 or get a ipv6 range and easily turn it into a version of deployable web software!
 # Recommended hardware 
